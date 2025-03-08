@@ -191,6 +191,9 @@ internal actual class TLSClientEngine actual constructor(tlsSettings: TLSClientS
     }
 
     actual override fun close() {
-        SSL_free(context)
+        if (content != null) {
+            SSL_free(context)
+            content = null
+        }
     }
 }
